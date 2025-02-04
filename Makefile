@@ -6,14 +6,14 @@
 #    By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/07 14:58:48 by bfleury           #+#    #+#              #
-#    Updated: 2025/02/03 21:58:08 by bfleury          ###   ########.fr        #
+#    Updated: 2025/02/04 17:45:25 by bfleury          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME				= push_swap
 
 LIB					= libftprintf.a
-LIB_DIR				= libftprintf
+LIB_DIR				= lib
 
 CC					= cc
 CFLAGS				= -Wall -Wextra -Werror

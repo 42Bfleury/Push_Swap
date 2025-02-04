@@ -6,13 +6,13 @@
 /*   By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:27:53 by bfleury           #+#    #+#             */
-/*   Updated: 2025/02/03 20:37:13 by bfleury          ###   ########.fr       */
+/*   Updated: 2025/02/04 22:14:48 by bfleury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	_ps_print_lists(t_list *a, t_list *b)
+void	ps_print_lists(t_list *a, t_list *b)
 {
 	ft_printf("Pile A:\n");
 	while (a)
@@ -37,10 +37,11 @@ int	main(int argc, char **argv)
 	b = NULL;
 	if (ps_check_dup(a))
 		ps_error(&a, &b);
-	_ps_print_lists(a, b);
+	// ps_print_lists(a, b);
+	// ft_printf("___________________________________________\n");
 	if (!ps_check_sorted(a))
 		ps_sort(&a, &b);
-	_ps_print_lists(a, b);
+	// ps_print_lists(a, b);
 	ft_lstclear(&a, NULL);
 	ft_lstclear(&b, NULL);
 	return (0);

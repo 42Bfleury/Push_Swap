@@ -6,15 +6,17 @@
 /*   By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:28:53 by bfleury           #+#    #+#             */
-/*   Updated: 2025/02/03 21:55:38 by bfleury          ###   ########.fr       */
+/*   Updated: 2025/02/04 21:38:48 by bfleury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "libftprintf/ft_printf.h"
-# include "libftprintf/libft_srcs/libft.h"
+# include "lib/ft_printf.h"
+# include "lib/libft_srcs/libft.h"
+
+void	ps_print_lists(t_list *a, t_list *b);
 
 void	ps_swap(t_list **lst, char print);
 void	ps_rotate(t_list **lst, char print);
@@ -43,7 +45,7 @@ int		ps_find_pos(t_list *lst, int nb);
 int		ps_find_new_pos(t_list *dest, int nb_src, int asc);
 int		ps_find_cheapest(t_list *src, t_list *dest, int asc);
 
-int		ps_get_moves(t_list *lst, int pos);
-int		ps_get_nb_op(t_list *src, t_list *dest, int pos_src, int pos_dest);
+int		ps_get_moves(t_list *lst, int pos, int src);
+int		ps_get_nb_op(t_list *src, t_list *dest, int pos_src, int pos_dest, int calc);
 
 #endif
