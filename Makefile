@@ -6,7 +6,7 @@
 #    By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/07 14:58:48 by bfleury           #+#    #+#              #
-#    Updated: 2025/02/04 17:45:25 by bfleury          ###   ########.fr        #
+#    Updated: 2025/02/08 19:16:22 by bfleury          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ LIB_DIR				= lib
 CC					= cc
 CFLAGS				= -Wall -Wextra -Werror
 
+SRCS_DIR			= srcs
 SRCS				= push_swap.c\
 					ps_move.c\
 					ps_sort.c\
@@ -29,18 +30,18 @@ SRCS				= push_swap.c\
 					ps_double_operations.c
 
 OBJS_DIR			= objs
-OBJS				= $(SRCS:%.c=$(OBJS_DIR)/%.o)
+OBJS				= $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
 
 all:				$(LIB) $(NAME)
 
 $(NAME):			$(OBJS_DIR) $(OBJS)
 					@${CC} ${CFLAGS} $(OBJS) -L$(LIB_DIR) -lftprintf -o $(NAME)
 
-$(OBJS_DIR)/%.o:	%.c
-					@$(CC) $(CFLAGS) -I$(LIB_DIR) -c $< -o $@
-
 $(OBJS_DIR):
 					@mkdir -p objs
+
+$(OBJS_DIR)/%.o:	%.c
+					@$(CC) $(CFLAGS) -I$(LIB_DIR) -c $< -o $@
 
 $(LIB):
 					@make -C $(LIB_DIR)

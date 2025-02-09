@@ -6,7 +6,7 @@
 /*   By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:27:53 by bfleury           #+#    #+#             */
-/*   Updated: 2025/02/04 22:14:48 by bfleury          ###   ########.fr       */
+/*   Updated: 2025/02/06 23:26:12 by bfleury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	main(int argc, char **argv)
 	// ft_printf("___________________________________________\n");
 	if (!ps_check_sorted(a))
 		ps_sort(&a, &b);
-	// ps_print_lists(a, b);
+	ps_print_lists(a, b);
 	ft_lstclear(&a, NULL);
 	ft_lstclear(&b, NULL);
 	return (0);
