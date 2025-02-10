@@ -6,52 +6,72 @@
 #    By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/07 14:58:48 by bfleury           #+#    #+#              #
-#    Updated: 2025/02/08 19:16:22 by bfleury          ###   ########.fr        #
+#    Updated: 2025/02/10 19:27:07 by bfleury          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME				= push_swap
 
-LIB					= libftprintf.a
-LIB_DIR				= lib
+################################### PROJECT ###################################
+
+
+NAME				= push_swap
 
 CC					= cc
 CFLAGS				= -Wall -Wextra -Werror
 
-SRCS_DIR			= srcs
-SRCS				= push_swap.c\
-					ps_move.c\
-					ps_sort.c\
-					ps_parse.c\
-					ps_check.c\
-					ps_operations.c\
-					ps_calculations.c\
-					ps_min_max_utils.c\
+LIB_DIR				= lib
+
+LIBFT				= libft.a
+LIBFT_DIR			= $(LIB_DIR)/Libft
+
+LIBPRINTF			= libftprintf.a
+LIBPRINTF_DIR		= $(LIB_DIR)/Ft_Printf
+
+FILES				= push_swap.c			\
+					ps_move.c				\
+					ps_sort.c				\
+					ps_parse.c				\
+					ps_check.c				\
+					ps_operations.c			\
+					ps_calculations.c		\
+					ps_min_max_utils.c		\
 					ps_double_operations.c
 
-OBJS_DIR			= objs
-OBJS				= $(SRCS:$(SRCS_DIR)/%.c=$(OBJS_DIR)/%.o)
+SRCS_DIR			= srcs
+SRCS				= $(addprefix $(SRCS_DIR)/, $(FILES))
 
-all:				$(LIB) $(NAME)
+OBJS_DIR			= objs
+OBJS				= $(FILES:%.c=$(OBJS_DIR)/%.o)
+
+
+#################################### RULES ####################################
+
+
+all:				$(LIBFT) $(LIBPRINTF) $(NAME)
 
 $(NAME):			$(OBJS_DIR) $(OBJS)
-					@${CC} ${CFLAGS} $(OBJS) -L$(LIB_DIR) -lftprintf -o $(NAME)
+					@${CC} ${CFLAGS} $(OBJS) -L$(LIBFT_DIR) -l$(LIBFT:lib%.a=%) -L$(LIBPRINTF_DIR) -l$(LIBPRINTF:lib%.a=%) -o $(NAME)
 
 $(OBJS_DIR):
 					@mkdir -p objs
 
-$(OBJS_DIR)/%.o:	%.c
-					@$(CC) $(CFLAGS) -I$(LIB_DIR) -c $< -o $@
+$(OBJS_DIR)/%.o:	$(SRCS_DIR)/%.c
+					@$(CC) $(CFLAGS) -c $< -o $@
 
-$(LIB):
-					@make -C $(LIB_DIR)
+$(LIBFT):
+					@make bonus -C $(LIBFT_DIR)
+
+$(LIBPRINTF):
+					@make -C $(LIBPRINTF_DIR)
 
 clean:
-					@make clean -C $(LIB_DIR)
+					@make clean -C $(LIBFT_DIR)
+					@make clean -C $(LIBPRINTF_DIR)
 					@rm -rf $(OBJS_DIR)
 
 fclean:				clean
-					@make fclean -C $(LIB_DIR)
+					@make fclean -C $(LIBFT_DIR)
+					@make fclean -C $(LIBPRINTF_DIR)
 					@rm -f $(NAME)
 
 re:					fclean all
