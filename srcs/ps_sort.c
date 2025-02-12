@@ -6,7 +6,7 @@
 /*   By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 00:50:27 by bfleury           #+#    #+#             */
-/*   Updated: 2025/02/10 19:43:55 by bfleury          ###   ########.fr       */
+/*   Updated: 2025/02/12 04:50:07 by bfleury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,12 @@ void	ps_reorder_lst(t_list **lst)
 	}
 }
 
-int	ps_sort_lst_a_3(t_list **lst)
+void	ps_sort_lst_a_3(t_list **lst)
 {
 	if (!lst || !*lst)
-		return (-1);
+		return ;
 	if (!ps_check_sorted(*lst))
-	{
 		ps_swap(lst, 'a');
-		return (1);
-	}
-	return (0);
 }
 
 void	ps_sort(t_list **a, t_list **b)
@@ -54,12 +50,13 @@ void	ps_sort(t_list **a, t_list **b)
 	{
 		nb = ps_find_cheapest(*a, *b, 0);
 		ps_move(nb, a, b, 'b');
+		ps_push(a, b, 'b');
 	}
 	ps_sort_lst_a_3(a);
 	while (ft_lstsize(*b))
 	{
 		nb = ps_find_cheapest(*b, *a, 1);
 		ps_move(nb, b, a, 'a');
+		ps_push(b, a, 'a');
 	}
-	ps_reorder_lst(a);
 }

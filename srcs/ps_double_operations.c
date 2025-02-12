@@ -6,32 +6,29 @@
 /*   By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 13:18:59 by bfleury           #+#    #+#             */
-/*   Updated: 2025/02/10 19:24:58 by bfleury          ###   ########.fr       */
+/*   Updated: 2025/02/12 03:36:32 by bfleury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	ps_ss(t_list **a, t_list **b, int print)
+void	ps_ss(t_list **a, t_list **b)
 {
 	ps_swap(a, 0);
 	ps_swap(b, 0);
-	if (print)
-		ft_printf("ss\n");
+	ft_printf("ss\n");
 }
 
-void	ps_rr(t_list **a, t_list **b, int print)
+void	ps_rr(t_list **a, t_list **b)
 {
 	ps_rotate(a, 0);
 	ps_rotate(b, 0);
-	if (print)
-		ft_printf("rr\n");
+	ft_printf("rr\n");
 }
 
-void	ps_rrr(t_list **a, t_list **b, int print)
+void	ps_rrr(t_list **a, t_list **b)
 {
 	ps_reverse_rotate(a, 0);
 	ps_reverse_rotate(b, 0);
-	if (print)
-		ft_printf("rrr\n");
+	ft_printf("rrr\n");
 }

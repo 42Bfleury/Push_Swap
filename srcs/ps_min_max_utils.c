@@ -6,7 +6,7 @@
 /*   By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:59:27 by bfleury           #+#    #+#             */
-/*   Updated: 2025/02/10 19:24:50 by bfleury          ###   ########.fr       */
+/*   Updated: 2025/02/12 01:12:03 by bfleury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	ps_find_pos_min(t_list *lst)
 
 	pos = 0;
 	result = 0;
+	min = (int)(long)lst->content;
 	while (lst)
 	{
 		pos++;

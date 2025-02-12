@@ -6,7 +6,7 @@
 /*   By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:42:21 by bfleury           #+#    #+#             */
-/*   Updated: 2025/02/10 19:38:06 by bfleury          ###   ########.fr       */
+/*   Updated: 2025/02/12 01:55:49 by bfleury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,11 @@ int	ps_check_sorted(t_list *lst)
 	int		nb;
 	int		first;
 
-	pos = 1;
+	if (!lst)
+		return (0);
+	pos = 0;
 	pos_min = ps_find_pos_min(lst);
-	if (!lst || !pos_min)
-		return (-1);
 	first = (int)(long)lst->content;
-	lst = lst->next;
 	while (lst)
 	{
 		nb = (int)(long)lst->content;

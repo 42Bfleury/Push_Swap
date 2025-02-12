@@ -6,7 +6,7 @@
 /*   By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:44:53 by bfleury           #+#    #+#             */
-/*   Updated: 2025/02/10 19:48:13 by bfleury          ###   ########.fr       */
+/*   Updated: 2025/02/12 02:20:13 by bfleury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ int	ps_find_new_pos(t_list *dest, int nb_src, int asc)
 	return (i);
 }
 
-int	ps_get_moves(t_list *lst, int pos, int calc)
+int	ps_get_moves(t_list *lst, int pos, int src)
 {
 	int		size;
 
-	if (calc)
+	if (src)
 		size = ft_lstsize(lst) + pos - 1;
 	else
 		size = ft_lstsize(lst);
@@ -69,12 +69,12 @@ int	ps_get_moves(t_list *lst, int pos, int calc)
 	return (pos - 1);
 }
 
-int	ps_get_nb_op(t_list *src, t_list *dest, int pos_src, int pos_dest, int calc)
+int	ps_get_nb_op(t_list *src, t_list *dest, int pos_src, int pos_dest)
 {
 	int		moves_src;
 	int		moves_dest;
 
-	moves_src = ps_get_moves(src, pos_src, calc);
+	moves_src = ps_get_moves(src, pos_src, 1);
 	moves_dest = ps_get_moves(dest, pos_dest, 0);
 	if (moves_src >= 0 && moves_dest >= 0)
 	{
@@ -104,11 +104,11 @@ int	ps_find_cheapest(t_list *src, t_list *dest, int asc)
 	pos = 1;
 	result = (int)(long)src->content;
 	new_pos = ps_find_new_pos(dest, result, asc);
-	moves = ps_get_nb_op(src, dest, pos, new_pos, 1);
+	moves = ps_get_nb_op(src, dest, pos, new_pos);
 	while (src)
 	{
 		new_pos = ps_find_new_pos(dest, (int)(long)src->content, asc);
-		tmp = ps_get_nb_op(src, dest, pos, new_pos, 1);
+		tmp = ps_get_nb_op(src, dest, pos, new_pos);
 		if (tmp < moves)
 		{
 			moves = tmp;
