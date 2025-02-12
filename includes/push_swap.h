@@ -6,13 +6,14 @@
 /*   By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:28:53 by bfleury           #+#    #+#             */
-/*   Updated: 2025/02/12 15:37:29 by bfleury          ###   ########.fr       */
+/*   Updated: 2025/02/12 18:15:05 by bfleury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
+# include <limits.h>
 # include "../lib/Libft/includes/libft.h"
 # include "../lib/Ft_Printf/includes/ft_printf.h"
 
