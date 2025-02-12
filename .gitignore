@@ -1,7 +1,8 @@
 objs
 push_swap
-checker_linux
 ProChecker
-push_swap_visualizer
+checker_linux
+push_swap_tester
 Push-Swap-Tester
+push_swap_visualizer
 push_swap_test_linux.sh
