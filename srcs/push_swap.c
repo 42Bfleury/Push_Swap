@@ -6,40 +6,32 @@
 /*   By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:27:53 by bfleury           #+#    #+#             */
-/*   Updated: 2025/02/12 01:34:19 by bfleury          ###   ########.fr       */
+/*   Updated: 2025/02/12 15:23:22 by bfleury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-/*void	ps_print_lists(t_list *a, t_list *b)
+void	ps_error(t_list **a, t_list **b)
 {
-	ft_printf("Pile A:\n");
-	while (a)
-	{
-		ft_printf("%i\n", (int)(long)a->content);
-		a = a->next;
-	}
-	ft_printf("Pile B:\n");
-	while (b)
-	{
-		ft_printf("%i\n", (int)(long)b->content);
-		b = b->next;
-	}
-}*/
+	ft_lstclear(a, NULL);
+	ft_lstclear(b, NULL);
+	ft_putstr_fd("Error\n", 2);
+	exit(1);
+}
 
-int	main(int argc, char **argv)
+int	main(int ac, char **av)
 {
 	t_list	*a;
 	t_list	*b;
 
-	a = ps_parse(argc, argv);
+	a = ps_parse(ac, av);
 	b = NULL;
 	if (ps_check_dup(a))
 		ps_error(&a, &b);
 	if (!ps_check_sorted(a))
 		ps_sort(&a, &b);
-	ps_reorder_lst(&a);
+	ps_reorder(&a, 1);
 	ft_lstclear(&a, NULL);
 	return (0);
 }

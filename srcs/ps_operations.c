@@ -6,26 +6,28 @@
 /*   By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 13:18:59 by bfleury           #+#    #+#             */
-/*   Updated: 2025/02/12 03:11:52 by bfleury          ###   ########.fr       */
+/*   Updated: 2025/02/12 15:44:40 by bfleury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	ps_push(t_list **src, t_list **dest, char print)
+void	ps_push(t_list **s, t_list **d, char p)
 {
 	t_list	*tmp;
 
-	if (!*src)
+	if (!*s)
 		return ;
-	tmp = (*src)->next;
-	ft_lstadd_front(dest, *src);
-	*src = tmp;
-	if (print == 'a' || print == 'b')
-		ft_printf("p%c\n", print);
+	tmp = (*s)->next;
+	ft_lstadd_front(d, *s);
+	*s = tmp;
+	if (p == 1)
+		ft_printf("pa\n");
+	if (p == -1)
+		ft_printf("pb\n");
 }
 
-void	ps_swap(t_list **lst, char print)
+void	ps_swap(t_list **lst, char p)
 {
 	t_list	*tmp;
 
@@ -35,11 +37,13 @@ void	ps_swap(t_list **lst, char print)
 	*lst = (*lst)->next;
 	tmp->next = (*lst)->next;
 	(*lst)->next = tmp;
-	if (print == 'a' || print == 'b')
-		ft_printf("s%c\n", print);
+	if (p == 1)
+		ft_printf("sa\n");
+	if (p == -1)
+		ft_printf("sb\n");
 }
 
-void	ps_rotate(t_list **lst, char print)
+void	ps_rotate(t_list **lst, char p)
 {
 	t_list	*tmp;
 
@@ -49,11 +53,13 @@ void	ps_rotate(t_list **lst, char print)
 	tmp->next = *lst;
 	*lst = (*lst)->next;
 	tmp->next->next = NULL;
-	if (print == 'a' || print == 'b')
-		ft_printf("r%c\n", print);
+	if (p == 1)
+		ft_printf("ra\n");
+	if (p == -1)
+		ft_printf("rb\n");
 }
 
-void	ps_reverse_rotate(t_list **lst, char print)
+void	ps_rev_rotate(t_list **lst, char p)
 {
 	t_list	*tmp;
 
@@ -63,6 +69,8 @@ void	ps_reverse_rotate(t_list **lst, char print)
 	tmp->next->next = *lst;
 	*lst = tmp->next;
 	tmp->next = NULL;
-	if (print == 'a' || print == 'b')
-		ft_printf("rr%c\n", print);
+	if (p == 1)
+		ft_printf("rra\n");
+	if (p == -1)
+		ft_printf("rrb\n");
 }

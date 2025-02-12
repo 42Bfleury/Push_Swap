@@ -6,7 +6,7 @@
 /*   By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/18 13:18:59 by bfleury           #+#    #+#             */
-/*   Updated: 2025/02/12 03:36:32 by bfleury          ###   ########.fr       */
+/*   Updated: 2025/02/12 15:15:46 by bfleury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	ps_rr(t_list **a, t_list **b)
 
 void	ps_rrr(t_list **a, t_list **b)
 {
-	ps_reverse_rotate(a, 0);
-	ps_reverse_rotate(b, 0);
+	ps_rev_rotate(a, 0);
+	ps_rev_rotate(b, 0);
 	ft_printf("rrr\n");
 }

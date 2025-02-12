@@ -6,53 +6,53 @@
 /*   By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 13:42:21 by bfleury           #+#    #+#             */
-/*   Updated: 2025/02/12 01:55:49 by bfleury          ###   ########.fr       */
+/*   Updated: 2025/02/12 15:40:17 by bfleury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	ps_check_dup(t_list *lst)
+int	ps_check_dup(t_list *l)
 {
 	t_list	*tmp;
 
-	if (!lst)
+	if (!l)
 		return (-1);
-	while (lst)
+	while (l)
 	{
-		tmp = lst->next;
+		tmp = l->next;
 		while (tmp)
 		{
-			if (lst->content == tmp->content)
+			if (l->content == tmp->content)
 				return (1);
 			tmp = tmp->next;
 		}
-		lst = lst->next;
+		l = l->next;
 	}
 	return (0);
 }
 
-int	ps_check_sorted(t_list *lst)
+int	ps_check_sorted(t_list *l)
 {
-	int		pos;
-	int		pos_min;
 	int		nb;
 	int		first;
+	int		pos;
+	int		pos_min;
 
-	if (!lst)
+	if (!l)
 		return (0);
 	pos = 0;
-	pos_min = ps_find_pos_min(lst);
-	first = (int)(long)lst->content;
-	while (lst)
+	pos_min = ps_find_pos_min(l);
+	first = (int)(long)l->content;
+	while (l)
 	{
-		nb = (int)(long)lst->content;
+		nb = (int)(long)l->content;
 		pos++;
-		if ((lst->next && pos != (pos_min - 1)
-				&& nb > (int)(long)lst->next->content)
-			|| (!lst->next && pos_min > 1 && first < nb))
+		if ((l->next && pos != (pos_min - 1)
+				&& nb > (int)(long)l->next->content)
+			|| (!l->next && pos_min > 1 && first < nb))
 			return (0);
-		lst = lst->next;
+		l = l->next;
 	}
 	return (1);
 }

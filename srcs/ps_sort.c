@@ -6,40 +6,18 @@
 /*   By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 00:50:27 by bfleury           #+#    #+#             */
-/*   Updated: 2025/02/12 04:50:07 by bfleury          ###   ########.fr       */
+/*   Updated: 2025/02/12 15:49:55 by bfleury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	ps_reorder_lst(t_list **lst)
+static void	_sort_lst_3(t_list **l, int p)
 {
-	int		i;
-	int		pos_min;
-	int		lst_size;
-
-	pos_min = ps_find_pos_min(*lst);
-	lst_size = ft_lstsize(*lst);
-	if (pos_min <= (lst_size / 2) + 1)
-	{
-		i = pos_min - 1;
-		while (i--)
-			ps_rotate(lst, 'a');
-	}
-	else
-	{
-		i = lst_size - pos_min + 1;
-		while (i--)
-			ps_reverse_rotate(lst, 'a');
-	}
-}
-
-void	ps_sort_lst_a_3(t_list **lst)
-{
-	if (!lst || !*lst)
+	if (!l || !*l)
 		return ;
-	if (!ps_check_sorted(*lst))
-		ps_swap(lst, 'a');
+	if (!ps_check_sorted(*l))
+		ps_swap(l, p);
 }
 
 void	ps_sort(t_list **a, t_list **b)
@@ -48,15 +26,37 @@ void	ps_sort(t_list **a, t_list **b)
 
 	while (ft_lstsize(*a) > 3)
 	{
-		nb = ps_find_cheapest(*a, *b, 0);
-		ps_move(nb, a, b, 'b');
-		ps_push(a, b, 'b');
+		nb = ps_get_cheapest(*a, *b, 0);
+		ps_move(nb, a, b, -1);
+		ps_push(a, b, -1);
 	}
-	ps_sort_lst_a_3(a);
+	_sort_lst_3(a, 1);
 	while (ft_lstsize(*b))
 	{
-		nb = ps_find_cheapest(*b, *a, 1);
-		ps_move(nb, b, a, 'a');
-		ps_push(b, a, 'a');
+		nb = ps_get_cheapest(*b, *a, 1);
+		ps_move(nb, b, a, 1);
+		ps_push(b, a, 1);
+	}
+}
+
+void	ps_reorder(t_list **l, int p)
+{
+	int		i;
+	int		pos_min;
+	int		size;
+
+	pos_min = ps_find_pos_min(*l);
+	size = ft_lstsize(*l);
+	if (pos_min <= (size / 2) + 1)
+	{
+		i = pos_min - 1;
+		while (i--)
+			ps_rotate(l, p);
+	}
+	else
+	{
+		i = size - pos_min + 1;
+		while (i--)
+			ps_rev_rotate(l, p);
 	}
 }

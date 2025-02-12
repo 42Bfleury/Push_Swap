@@ -6,81 +6,97 @@
 /*   By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 20:40:48 by bfleury           #+#    #+#             */
-/*   Updated: 2025/02/12 04:50:46 by bfleury          ###   ########.fr       */
+/*   Updated: 2025/02/12 15:16:44 by bfleury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	ps_move(int nb, t_list **src, t_list **dest, char print)
+static void	_move_rr(int n, t_list **s, t_list **d, char p)
 {
 	int	i;
-	int	moves_src;
-	int	moves_dest;
+	int	moves_s;
+	int	moves_d;
 
 	i = 0;
-	moves_src = ps_get_moves(*src, ps_find_pos(*src, nb), 0);
-	moves_dest = ps_get_moves(*dest, ps_find_new_pos(*dest, nb, (print == 'a')), 0);
-	if (moves_src >= 0 && moves_dest >= 0)
+	moves_s = ps_get_moves(*s, ps_get_pos(*s, n), 0);
+	moves_d = ps_get_moves(*d, ps_get_new_pos(*d, n, (p == 1)), 0);
+	while (i < moves_s && i < moves_d)
 	{
-		while (i < moves_src && i < moves_dest)
-		{
-			ps_rr(src, dest);
-			i++;
-		}
-		while (i < moves_src || i < moves_dest)
-		{
-			if (i < moves_src && print == 'a')
-				ps_rotate(src, 'b');
-			else if (i < moves_src)
-				ps_rotate(src, 'a');
-			else
-				ps_rotate(dest, print);
-			i++;
-		}
+		ps_rr(s, d);
+		i++;
 	}
-	else if (moves_src <= 0 && moves_dest <= 0)
+	while (i < moves_s--)
+		ps_rotate(s, -p);
+	while (i < moves_d--)
+		ps_rotate(d, p);
+}
+
+static void	_move_rrr(int n, t_list **s, t_list **d, char p)
+{
+	int	i;
+	int	moves_s;
+	int	moves_d;
+
+	i = 0;
+	moves_s = ps_get_moves(*s, ps_get_pos(*s, n), 0);
+	moves_d = ps_get_moves(*d, ps_get_new_pos(*d, n, (p == 1)), 0);
+	while (i > moves_s && i > moves_d)
 	{
-		while (i > moves_src && i > moves_dest)
-		{
-			ps_rrr(src, dest);
-			i--;
-		}
-		while (i > moves_src || i > moves_dest)
-		{
-			if (i > moves_src && print == 'a')
-				ps_reverse_rotate(src, 'b');
-			else if (i > moves_src)
-				ps_reverse_rotate(src, 'a');
-			else
-				ps_reverse_rotate(dest, print);
-			i--;
-		}
+		ps_rrr(s, d);
+		i--;
 	}
-	else if (moves_src <= 0 && moves_dest >= 0)
-	{
-		while (i-- > moves_src)
-		{
-			if (print == 'a')
-				ps_reverse_rotate(src, 'b');
-			else
-				ps_reverse_rotate(src, 'a');
-		}
-		i = 0;
-		while (i++ < moves_dest)
-			ps_rotate(dest, print);
-	}
-	else if (moves_src >= 0 && moves_dest <= 0)
-	{
-		while (i++ < moves_src)
-		{
-			if (print == 'a')
-				ps_rotate(src, 'b');
-			else
-				ps_rotate(src, 'a');
-		}
-		i = 0;
-		while (i-- > moves_dest)
-			ps_reverse_rotate(dest, print);
-	}
+	while (i > moves_s++)
+		ps_rev_rotate(s, -p);
+	while (i > moves_d++)
+		ps_rev_rotate(d, p);
+}
+
+static void	_move_rr_r(int n, t_list **s, t_list **d, char p)
+{
+	int	i;
+	int	moves_s;
+	int	moves_d;
+
+	i = 0;
+	moves_s = ps_get_moves(*s, ps_get_pos(*s, n), 0);
+	moves_d = ps_get_moves(*d, ps_get_new_pos(*d, n, (p == 1)), 0);
+	while (moves_s++)
+		ps_rev_rotate(s, -p);
+	while (moves_d--)
+		ps_rotate(d, p);
+}
+
+static void	_move_r_rr(int n, t_list **s, t_list **d, char p)
+{
+	int	i;
+	int	moves_s;
+	int	moves_d;
+
+	i = 0;
+	moves_s = ps_get_moves(*s, ps_get_pos(*s, n), 0);
+	moves_d = ps_get_moves(*d, ps_get_new_pos(*d, n, (p == 1)), 0);
+	while (moves_s--)
+		ps_rotate(s, -p);
+	while (moves_d++)
+		ps_rev_rotate(d, p);
+}
+
+void	ps_move(int n, t_list **s, t_list **d, char p)
+{
+	int	i;
+	int	moves_s;
+	int	moves_d;
+
+	i = 0;
+	moves_s = ps_get_moves(*s, ps_get_pos(*s, n), 0);
+	moves_d = ps_get_moves(*d, ps_get_new_pos(*d, n, (p == 1)), 0);
+	if (moves_s >= 0 && moves_d >= 0)
+		_move_rr(n, s, d, p);
+	else if (moves_s <= 0 && moves_d <= 0)
+		_move_rrr(n, s, d, p);
+	else if (moves_s <= 0 && moves_d >= 0)
+		_move_rr_r(n, s, d, p);
+	else if (moves_s >= 0 && moves_d <= 0)
+		_move_r_rr(n, s, d, p);
 }

@@ -6,45 +6,45 @@
 /*   By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:59:27 by bfleury           #+#    #+#             */
-/*   Updated: 2025/02/12 01:12:03 by bfleury          ###   ########.fr       */
+/*   Updated: 2025/02/12 15:42:52 by bfleury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-int	ps_find_min(t_list *lst)
+int	ps_find_min(t_list *l)
 {
 	int		min;
 
-	if (!lst)
+	if (!l)
 		return (0);
-	min = (int)(long)lst->content;
-	while (lst)
+	min = (int)(long)l->content;
+	while (l)
 	{
-		if ((int)(long)lst->content < min)
-			min = (int)(long)lst->content;
-		lst = lst->next;
+		if ((int)(long)l->content < min)
+			min = (int)(long)l->content;
+		l = l->next;
 	}
 	return (min);
 }
 
-int	ps_find_max(t_list *lst)
+int	ps_find_max(t_list *l)
 {
 	int		max;
 
-	if (!lst)
+	if (!l)
 		return (0);
-	max = (int)(long)lst->content;
-	while (lst)
+	max = (int)(long)l->content;
+	while (l)
 	{
-		if ((int)(long)lst->content > max)
-			max = (int)(long)lst->content;
-		lst = lst->next;
+		if ((int)(long)l->content > max)
+			max = (int)(long)l->content;
+		l = l->next;
 	}
 	return (max);
 }
 
-int	ps_find_pos_min(t_list *lst)
+int	ps_find_pos_min(t_list *l)
 {
 	int		pos;
 	int		min;
@@ -52,21 +52,21 @@ int	ps_find_pos_min(t_list *lst)
 
 	pos = 0;
 	result = 0;
-	min = (int)(long)lst->content;
-	while (lst)
+	min = (int)(long)l->content;
+	while (l)
 	{
 		pos++;
-		if (!result || (int)(long)lst->content < min)
+		if (!result || (int)(long)l->content < min)
 		{
-			min = (int)(long)lst->content;
+			min = (int)(long)l->content;
 			result = pos;
 		}
-		lst = lst->next;
+		l = l->next;
 	}
 	return (result);
 }
 
-int	ps_find_pos_max(t_list *lst)
+int	ps_find_pos_max(t_list *l)
 {
 	int		pos;
 	int		max;
@@ -74,15 +74,16 @@ int	ps_find_pos_max(t_list *lst)
 
 	pos = 0;
 	result = 0;
-	while (lst)
+	max = (int)(long)l->content;
+	while (l)
 	{
 		pos++;
-		if (!result || (int)(long)lst->content > max)
+		if (!result || (int)(long)l->content > max)
 		{
-			max = (int)(long)lst->content;
+			max = (int)(long)l->content;
 			result = pos;
 		}
-		lst = lst->next;
+		l = l->next;
 	}
 	return (result);
 }
