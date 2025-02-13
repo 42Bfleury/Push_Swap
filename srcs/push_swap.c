@@ -6,18 +6,19 @@
 /*   By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:27:53 by bfleury           #+#    #+#             */
-/*   Updated: 2025/02/12 15:23:22 by bfleury          ###   ########.fr       */
+/*   Updated: 2025/02/13 12:39:14 by bfleury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	ps_error(t_list **a, t_list **b)
+int	ps_error(t_list **a, t_list **b, int p)
 {
 	ft_lstclear(a, NULL);
 	ft_lstclear(b, NULL);
-	ft_putstr_fd("Error\n", 2);
-	exit(1);
+	if (p)
+		ft_putstr_fd("Error\n", 2);
+	return (0);
 }
 
 int	main(int ac, char **av)
@@ -25,10 +26,14 @@ int	main(int ac, char **av)
 	t_list	*a;
 	t_list	*b;
 
+	if (ac < 2)
+		return (-1);
 	a = ps_parse(ac, av);
 	b = NULL;
+	if (!a)
+		return (ps_error(&a, &b, 1));
 	if (ps_check_dup(a))
-		ps_error(&a, &b);
+		return (ps_error(&a, &b, 1));
 	if (!ps_check_sorted(a))
 		ps_sort(&a, &b);
 	ps_reorder(&a, 1);

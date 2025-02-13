@@ -6,7 +6,7 @@
 /*   By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/02 03:53:20 by bfleury           #+#    #+#             */
-/*   Updated: 2025/02/12 18:20:50 by bfleury          ###   ########.fr       */
+/*   Updated: 2025/02/13 12:41:08 by bfleury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,63 +34,78 @@ static long	_atol(const char *str)
 	return (result);
 }
 
-static void	_parse_arg(t_list **l, char *s)
+static int	_parse_arg(t_list **l, char *s)
 {
 	int		i;
 	long	n;
+	t_list	*new;
 
 	i = 0;
-	if (s[i] == '-' || s[i] == '+')
+	if (s && (s[i] == '-' || s[i] == '+'))
 		i++;
-	if (!s[i])
-		ps_error(l, NULL);
+	if (!s || !s[i])
+		return (ps_error(l, NULL, 0));
 	while (s[i])
 	{
 		if (!ft_isdigit(s[i]))
-			ps_error(l, NULL);
+			return (ps_error(l, NULL, 0));
 		i++;
 	}
 	n = _atol(s);
 	if (n < INT_MIN || n > INT_MAX)
-		ps_error(l, NULL);
-	ft_lstadd_back(l, ft_lstnew((void *)n));
+		return (ps_error(l, NULL, 0));
+	new = ft_lstnew((void *)n);
+	if (!new)
+		return (ps_error(l, NULL, 0));
+	ft_lstadd_back(l, new);
+	if (!*l)
+		return (ps_error(l, NULL, 0));
+	return (1);
 }
 
-static void	_parse_string(t_list **l, char *s)
+static int	_parse_string(t_list **l, char *s)
 {
-	char	**tab;
 	int		i;
+	int		result;
+	char	**tab;
 
 	i = 0;
+	result = 1;
 	tab = ft_split(s, ' ');
+	if (!tab)
+		return (ps_error(l, NULL, 0));
 	while (tab[i])
 	{
-		_parse_arg(l, tab[i]);
+		if (result)
+			result = _parse_arg(l, tab[i]);
 		free(tab[i]);
 		i++;
 	}
 	free(tab);
 	tab = NULL;
+	return (result);
 }
 
 t_list	*ps_parse(int ac, char **av)
 {
-	t_list	*a;
 	int		i;
+	int		result;
+	t_list	*a;
 
 	a = NULL;
-	if (ac < 2)
-		ps_error(NULL, NULL);
 	i = 1;
-	while (i < ac)
+	result = 1;
+	while (result && i < ac)
 	{
 		if (!ft_strlen(av[i]))
-			ps_error(&a, NULL);
+			result = ps_error(&a, NULL, 0);
 		else if (ft_strchr(av[i], ' '))
-			_parse_string(&a, av[i]);
+			result = _parse_string(&a, av[i]);
 		else
-			_parse_arg(&a, av[i]);
+			result = _parse_arg(&a, av[i]);
 		i++;
 	}
+	if (!result)
+		return (NULL);
 	return (a);
 }
