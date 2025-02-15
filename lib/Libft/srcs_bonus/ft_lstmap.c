@@ -6,7 +6,7 @@
 /*   By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/02 18:06:55 by bfleury           #+#    #+#             */
-/*   Updated: 2025/02/08 15:14:37 by bfleury          ###   ########.fr       */
+/*   Updated: 2025/02/15 19:16:02 by bfleury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void(*del)(void *))
 	t_list	*node;
 	t_list	*result;
 
-	if (!lst || !f || !del)
+	if (!lst)
 		return (NULL);
 	result = NULL;
 	while (lst)

@@ -6,7 +6,7 @@
 #    By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/07 14:58:48 by bfleury           #+#    #+#              #
-#    Updated: 2025/02/12 04:49:03 by bfleury          ###   ########.fr        #
+#    Updated: 2025/02/15 21:36:45 by bfleury          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,16 +16,14 @@
 
 NAME				= push_swap
 
+LIB_DIR				= lib
+LIBNAME				= libftfull_bonus.a
+LIBFLAGS			= -L$(LIB_DIR) -l$(LIBNAME:lib%.a=%)
+
 CC					= cc
 CFLAGS				= -Wall -Wextra -Werror
 
-LIB_DIR				= lib
-
-LIBFT				= libft.a
-LIBFT_DIR			= $(LIB_DIR)/Libft
-
-LIBPRINTF			= libftprintf.a
-LIBPRINTF_DIR		= $(LIB_DIR)/Ft_Printf
+RM					= rm -rf
 
 FILES				= push_swap.c			\
 					ps_move.c				\
@@ -47,10 +45,10 @@ OBJS				= $(FILES:%.c=$(OBJS_DIR)/%.o)
 #################################### RULES ####################################
 
 
-all:				$(LIBFT) $(LIBPRINTF) $(NAME)
+all:				$(NAME)
 
-$(NAME):			$(OBJS_DIR) $(OBJS)
-					@${CC} ${CFLAGS} $(OBJS) -L$(LIBFT_DIR) -l$(LIBFT:lib%.a=%) -L$(LIBPRINTF_DIR) -l$(LIBPRINTF:lib%.a=%) -o $(NAME)
+$(NAME):			$(LIBNAME) $(OBJS_DIR) $(OBJS)
+					@${CC} ${CFLAGS} $(OBJS) $(LIBFLAGS) -o $(NAME)
 
 $(OBJS_DIR):
 					@mkdir -p objs
@@ -58,21 +56,16 @@ $(OBJS_DIR):
 $(OBJS_DIR)/%.o:	$(SRCS_DIR)/%.c
 					@$(CC) $(CFLAGS) -c $< -o $@
 
-$(LIBFT):
-					@make bonus -C $(LIBFT_DIR)
-
-$(LIBPRINTF):
-					@make -C $(LIBPRINTF_DIR)
+$(LIBNAME):
+					@$(MAKE) $(LIBNAME) -C $(LIB_DIR)
 
 clean:
-					@make clean -C $(LIBFT_DIR)
-					@make clean -C $(LIBPRINTF_DIR)
-					@rm -rf $(OBJS_DIR)
+					@$(MAKE) clean -C $(LIB_DIR)
+					@$(RM) $(OBJS_DIR)
 
 fclean:				clean
-					@make fclean -C $(LIBFT_DIR)
-					@make fclean -C $(LIBPRINTF_DIR)
-					@rm -f $(NAME)
+					@$(MAKE) fclean -C $(LIB_DIR)
+					@$(RM) $(NAME)
 
 re:					fclean all
 

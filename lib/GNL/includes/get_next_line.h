@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstiter.c                                       :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/02 18:06:28 by bfleury           #+#    #+#             */
-/*   Updated: 2025/02/15 19:15:37 by bfleury          ###   ########.fr       */
+/*   Created: 2024/03/05 09:06:04 by bfleury           #+#    #+#             */
+/*   Updated: 2025/02/15 17:36:21 by bfleury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
-{
-	while (lst)
-	{
-		f(lst->content);
-		lst = lst->next;
-	}
-}
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
+# include <stdlib.h>
+# include <unistd.h>
+
+char		*get_next_line(int fd);
+
+int			ft_gnl_strlen(char *str);
+char		*ft_gnl_strchr(char *str, int c);
+char		*ft_gnl_strdup(char *str, int len);
+char		*ft_gnl_strjoin(char *str1, char *str2);
+#endif

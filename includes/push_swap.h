@@ -6,7 +6,7 @@
 /*   By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 14:28:53 by bfleury           #+#    #+#             */
-/*   Updated: 2025/02/13 12:50:28 by bfleury          ###   ########.fr       */
+/*   Updated: 2025/02/15 21:09:02 by bfleury          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 # define PUSH_SWAP_H
 
 # include <limits.h>
-# include "../lib/Libft/includes/libft.h"
-# include "../lib/Ft_Printf/includes/ft_printf.h"
+# include "../lib/includes/libftfull.h"
 
 int		ps_error(t_list **a, t_list **b, int p);
 
