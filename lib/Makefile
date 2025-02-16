@@ -6,7 +6,7 @@
 #    By: bfleury <bfleury@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/03/23 00:12:15 by bfleury           #+#    #+#              #
-#    Updated: 2025/02/15 20:57:29 by bfleury          ###   ########.fr        #
+#    Updated: 2025/02/16 05:45:25 by bfleury          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,8 @@
 NAME						= libftfull.a
 BONUS						= libftfull_bonus.a
 
+TYPEFILE					= library
+
 LIB_DIR						= .
 OBJS_DIR					= objs
 
@@ -24,6 +26,39 @@ CC							= cc
 CFLAGS						= -Wall -Wextra -Werror
 
 RM							= rm -rf
+
+
+################################## MESSAGES ####################################
+
+
+RED							= \033[31m
+YELLOW						= \033[33m
+GREEN						= \033[1;32m
+END							= \033[0m
+
+SUCCESS_MSG					= "$(GREEN)[SUCCESS]$(END)"
+
+OBJS_DIR_MSG				= "$(YELLOW)Creating $(TYPEFILE) $(OBJS_DIR) directory...		$(END)\c"
+
+LIBFT_OBJ_MSG				= "$(YELLOW)Generating Libft object...			$(END)\c"
+LIBFT_B_OBJ_MSG				= "$(YELLOW)Generating Libft bonus object...		$(END)\c"
+LIB_GNL_OBJ_MSG				= "$(YELLOW)Generating GNL object...			$(END)\c"
+LIB_GNL_B_OBJ_MSG			= "$(YELLOW)Generating GNL bonus object...			$(END)\c"
+LIB_PRINTF_OBJ_MSG			= "$(YELLOW)Generating Ft_Printf object...			$(END)\c"
+
+LIBFTFULL_MSG				= "$(GREEN)Generating $(NAME) $(TYPEFILE)...		$(END)\c"
+LIBFTFULL_B_MSG				= "$(GREEN)Generating $(BONUS) $(TYPEFILE)...		$(END)\c"
+LIBFT_MSG					= "$(GREEN)Generating $(LIBFT) $(TYPEFILE)...			$(END)\c"
+LIBFT_B_MSG					= "$(GREEN)Generating $(LIBFT_BONUS) $(TYPEFILE)...		$(END)\c"
+LIB_GNL_MSG					= "$(GREEN)Generating $(LIB_GNL) $(TYPEFILE)...			$(END)\c"
+LIB_GNL_B_MSG				= "$(GREEN)Generating $(LIB_GNL_BONUS) $(TYPEFILE)...		$(END)\c"
+LIB_PRINTF_MSG				= "$(GREEN)Generating $(LIB_PRINTF) $(TYPEFILE)...		$(END)\c"
+
+
+RM_OBJS_MSG					= "$(RED)Removing $(TYPEFILE) objects...			$(END)\c"
+RM_OBJS_DIR_MSG				= "$(RED)Removing $(TYPEFILE) objs directory...		$(END)\c"
+RM_LIBS_MSG					= "$(RED)Removing $(TYPEFILE)...				$(END)\c"
+
 
 #################################### LIBFT ####################################
 
@@ -138,75 +173,109 @@ all_lib_bonus:				$(LIBFT_BONUS) $(LIB_GNL_BONUS) $(LIB_PRINTF)
 ###						##### FULL #####
 
 $(NAME):					$(OBJS_DIR) $(LIBFT_OBJS) $(LIB_GNL_OBJS) $(LIB_PRINTF_OBJS)
+							@echo $(LIBFTFULL_MSG)
 							@ar rc $(LIB_DIR)/$(NAME) $(LIBFT_OBJS) $(LIB_GNL_OBJS) $(LIB_PRINTF_OBJS)
 							@ranlib $(LIB_DIR)/$(NAME)
+							@echo $(SUCCESS_MSG)
 
 $(BONUS):					$(OBJS_DIR) $(LIBFT_OBJS) $(LIBFT_B_OBJS) $(LIB_GNL_B_OBJS) $(LIB_PRINTF_OBJS)
+							@echo $(LIBFTFULL_B_MSG)
 							@ar rc $(LIB_DIR)/$(BONUS) $(LIBFT_OBJS) $(LIBFT_B_OBJS) $(LIB_GNL_B_OBJS) $(LIB_PRINTF_OBJS)
 							@ranlib $(LIB_DIR)/$(BONUS)
+							@echo $(SUCCESS_MSG)
 
 ###						##### LIBFT #####
 
 $(LIBFT):					$(OBJS_DIR) $(LIBFT_OBJS)
+							@echo $(LIBFT_MSG)
 							@ar rc $(LIB_DIR)/$(LIBFT) $(LIBFT_OBJS)
 							@ranlib $(LIB_DIR)/$(LIBFT)
+							@echo $(SUCCESS_MSG)
 
 $(LIBFT_BONUS):				$(OBJS_DIR) $(LIBFT_OBJS) $(LIBFT_B_OBJS)
+							@echo $(LIBFT_B_MSG)
 							@ar rc $(LIB_DIR)/$(LIBFT_BONUS) $(LIBFT_OBJS) $(LIBFT_B_OBJS)
 							@ranlib $(LIB_DIR)/$(LIBFT_BONUS)
+							@echo $(SUCCESS_MSG)
 
 ###						###### GNL ######
 
 $(LIB_GNL):					$(OBJS_DIR) $(LIB_GNL_OBJS)
+							@echo $(LIB_GNL_MSG)
 							@ar rc $(LIB_DIR)/$(LIB_GNL) $(LIB_GNL_OBJS)
 							@ranlib $(LIB_DIR)/$(LIB_GNL)
+							@echo $(SUCCESS_MSG)
 
 $(LIB_GNL_BONUS):			$(OBJS_DIR) $(LIB_GNL_B_OBJS)
+							@echo $(LIB_GNL_B_MSG)
 							@ar rc $(LIB_DIR)/$(LIB_GNL_BONUS) $(LIB_GNL_B_OBJS)
 							@ranlib $(LIB_DIR)/$(LIB_GNL_BONUS)
+							@echo $(SUCCESS_MSG)
 
 ###						##### PRINTF #####
 
 $(LIB_PRINTF):				$(OBJS_DIR) $(LIB_PRINTF_OBJS)
+							@echo $(LIB_PRINTF_MSG)
 							@ar rc $(LIB_DIR)/$(LIB_PRINTF) $(LIB_PRINTF_OBJS)
 							@ranlib $(LIB_DIR)/$(LIB_PRINTF)
+							@echo $(SUCCESS_MSG)
 
 
 #################################### OBJS ######################################
 
 
 $(OBJS_DIR):
+							@echo $(OBJS_DIR_MSG)
 							@mkdir -p $(OBJS_DIR)
+							@echo $(SUCCESS_MSG)
 
 ###						##### LIBFT #####
 
 $(OBJS_DIR)/%.o:			$(LIBFT_SRCS_DIR)/%.c
+							@echo $(LIBFT_OBJ_MSG)
 							@$(CC) $(CFLAGS) -c $< -o $@
+							@echo $(SUCCESS_MSG)
 
 $(OBJS_DIR)/%.o:			$(LIBFT_B_SRCS_DIR)/%.c
+							@echo $(LIBFT_B_OBJ_MSG)
 							@$(CC) $(CFLAGS) -c $< -o $@
+							@echo $(SUCCESS_MSG)
 
 ###						###### GNL ######
 
 $(OBJS_DIR)/%.o:			$(LIB_GNL_SRCS_DIR)/%.c
+							@echo $(LIB_GNL_OBJ_MSG)
 							@$(CC) $(CFLAGS) -c $< -o $@
+							@echo $(SUCCESS_MSG)
 
 $(OBJS_DIR)/%.o:			$(LIB_GNL_B_SRCS_DIR)/%.c
+							@echo $(LIB_GNL_B_OBJ_MSG)
 							@$(CC) $(CFLAGS) -c $< -o $@
+							@echo $(SUCCESS_MSG)
 
 ###						##### PRINTF #####
 
 $(OBJS_DIR)/%.o:			$(LIB_PRINTF_SRCS_DIR)/%.c
+							@echo $(LIB_PRINTF_OBJ_MSG)
 							@$(CC) $(CFLAGS) -c $< -o $@
+							@echo $(SUCCESS_MSG)
 
 
 #################################### CLEAN #####################################
 
 clean:
+							@echo $(RM_OBJS_MSG)
+							@$(RM) $(LIBFT_OBJS) $(LIBFT_B_OBJS) $(LIB_GNL_OBJS) $(LIB_GNL_B_OBJS) $(LIB_PRINTF_OBJS)
+							@echo $(SUCCESS_MSG)
+							@echo $(RM_OBJS_DIR_MSG)
 							@$(RM) $(OBJS_DIR)
+							@echo $(SUCCESS_MSG)
 
-fclean:						clean
+xclean:
+							@echo $(RM_LIBS_MSG)
 							@$(RM) $(NAME) $(BONUS) $(LIBFT) $(LIBFT_BONUS) $(LIB_GNL) $(LIB_GNL_BONUS) $(LIB_PRINTF)
+							@echo $(SUCCESS_MSG)
+fclean:						clean xclean
 
 re:							fclean all
 
